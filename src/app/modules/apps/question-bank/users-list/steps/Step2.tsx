@@ -3,9 +3,11 @@ import {Field, ErrorMessage} from 'formik'
 import {useListView} from '../core/ListViewProvider'
 
 import {Editor} from 'react-draft-wysiwyg'
-import {EditorState} from 'draft-js'
+import {convertToRaw, EditorState} from 'draft-js'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import clsx from 'clsx'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 
 type Props = {
   values: any
@@ -15,18 +17,13 @@ type Props = {
 const Step2: FC<Props> = ({values, setFieldValue}) => {
   const [editorState, setEditorState] = React.useState(EditorState.createEmpty())
   const [options, setOptions] = useState<any>([{option: '', right_option: 0}])
+  const [text, setText] = useState('')
 
   const editor: any = React.useRef(null)
 
   useEffect(() => {
     console.log(options, 'options')
   }, [options])
-
-  const log = () => {
-    if (editor.current) {
-      console.log(editor?.current.getContent())
-    }
-  }
 
   React.useEffect(() => {
     focusEditor()
@@ -35,6 +32,40 @@ const Step2: FC<Props> = ({values, setFieldValue}) => {
   function focusEditor () {
     editor?.current?.focus()
   }
+
+  const onEditorStateChange = (editorState: any) => {
+    setEditorState(editorState)
+  }
+
+  const uploadImage = (image: any) => {
+    debugger
+  }
+
+  const modules = {
+    toolbar: {
+      container: [
+        [{header: [1, 2, 3, 4, 5, 6, false]}],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [{list: 'ordered'}, {list: 'bullet'}, {indent: '-1'}, {indent: '+1'}],
+        ['link', 'image'],
+        ['clean'],
+      ],
+    },
+  }
+
+  const formats = [
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'image',
+  ]
 
   return (
     <div className='w-100'>
@@ -62,13 +93,15 @@ const Step2: FC<Props> = ({values, setFieldValue}) => {
         <>
           <div className='fv-row w-100 mb-10'>
             <label className='form-label required'>Question</label>
-            <Editor
-              editorState={editorState}
-              toolbarClassName='toolbarClassName'
-              wrapperClassName='demo-wrapper'
-              editorClassName='editorClassName'
-              // onEditorStateChange={onEditorStateChange}
+            <ReactQuill
+              value={text}
+              onChange={(content, delta, source, editor) => {
+                setText('')
+              }}
+              formats={formats}
+              modules={modules}
             />
+            {/* <textarea disabled value={draftToHtml(convertToRaw(editorState.getCurrentContent()))} /> */}
             {/* <div className='text-danger mt-2'>
               <ErrorMessage name='question.question' />
             </div> */}
@@ -79,7 +112,7 @@ const Step2: FC<Props> = ({values, setFieldValue}) => {
               editorState={editorState}
               toolbarClassName='toolbarClassName'
               wrapperClassName='wrapperClassName'
-              editorClassName='editorClassName'
+              editorClassName='border h-150px'
               // onEditorStateChange={onEditorStateChange}
             />
             {/* <div className='text-danger mt-2'>
@@ -109,13 +142,13 @@ const Step2: FC<Props> = ({values, setFieldValue}) => {
                     data-repeater-list='kt_ecommerce_add_category_conditions'
                     className='d-flex flex-column gap-3'
                   >
-                    <div data-repeater-item='' className='form-group d-flex flex-wrap gap-10'>
+                    <div data-repeater-item='' className='form-group d-flex flex-wrap mb-5 gap-10'>
                       <div className='w-100 mw-100 w-550px'>
                         <Editor
                           editorState={editorState}
                           toolbarClassName='toolbarClassName'
                           wrapperClassName='wrapperClassName'
-                          editorClassName='editorClassName'
+                          editorClassName='border h-100px'
                           // onEditorStateChange={onEditorStateChange}
                         />
                       </div>

@@ -36,15 +36,25 @@ export function Login () {
   const [loading, setLoading] = useState(false)
   const {saveAuth, setCurrentUser} = useAuth()
   const navigate = useNavigate()
+  const [error, setError] = useState<string>()
 
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,
     onSubmit: async (values, {setStatus, setSubmitting}) => {
+      setError('')
       setLoading(true)
       try {
         const {data: auth} = await login(values.email, values.password)
-        navigate('/auth/verify-otp', {state: {...auth}})
+        let newdata: any = auth
+        if (newdata?.message) {
+          setStatus(newdata.message)
+          setError(newdata.message)
+          setSubmitting(false)
+          setLoading(false)
+        } else {
+          navigate('/auth/verify-otp', {state: {...auth}})
+        }
       } catch (error) {
         console.error(error)
         setStatus('The login detail is incorrect')
@@ -150,7 +160,15 @@ export function Login () {
             </div>
           </div>
         )}
+        <div className='fv-plugins-message-container'>
+          <div className='fv-help-block'>
+            <span role='alert' className='text-danger'>
+              {error}
+            </span>
+          </div>
+        </div>
       </div>
+
       {/* end::Form group */}
 
       {/* begin::Action */}
