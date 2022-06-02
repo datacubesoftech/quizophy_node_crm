@@ -6,6 +6,11 @@ import {Campaigns} from './components/Campaigns'
 import {Documents} from './components/Documents'
 import {Connections} from './components/Connections'
 import {ProfileHeader} from './ProfileHeader'
+import {useEffect, useState} from 'react'
+import {useAuth} from '../auth'
+import {isNotEmpty, QUERIES} from '../../../_metronic/helpers'
+import {useQuery} from 'react-query'
+import {getUserById} from '../../pages/staff-management/users-list/core/_requests'
 
 const profileBreadCrumbs: Array<PageLink> = [
   {
@@ -22,64 +27,89 @@ const profileBreadCrumbs: Array<PageLink> = [
   },
 ]
 
-const ProfilePage = () => (
-  <Routes>
-    <Route
-      element={
-        <>
-          <ProfileHeader />
-          <Outlet />
-        </>
-      }
-    >
+const ProfilePage = () => {
+  const {currentUser, logout} = useAuth()
+  const enabledQuery: boolean = isNotEmpty(currentUser?.id)
+  const [staff, setStaff] = useState<any>()
+
+  const {isLoading, data: staffs, error} = useQuery(
+    `${QUERIES.USERS_LIST}-permissions-${currentUser?.id}`,
+    () => {
+      return getUserById(currentUser?.id)
+    },
+    {
+      cacheTime: 0,
+      enabled: enabledQuery,
+      onError: (err) => {
+        console.error(err)
+      },
+    }
+  )
+  useEffect(() => {
+    if (staffs?.id) setStaff(staffs)
+  }, [staffs])
+
+  return (
+    <Routes>
       <Route
-        path='overview'
         element={
           <>
-            <PageTitle breadcrumbs={profileBreadCrumbs}>Overview</PageTitle>
-            <Overview />
+            <ProfileHeader staff={staffs} />
+            <Outlet />
           </>
         }
-      />
-      <Route
-        path='projects'
-        element={
-          <>
-            <PageTitle breadcrumbs={profileBreadCrumbs}>Projects</PageTitle>
-            <Projects />
-          </>
-        }
-      />
-      <Route
-        path='campaigns'
-        element={
-          <>
-            <PageTitle breadcrumbs={profileBreadCrumbs}>Campaigns</PageTitle>
-            <Campaigns />
-          </>
-        }
-      />
-      <Route
-        path='documents'
-        element={
-          <>
-            <PageTitle breadcrumbs={profileBreadCrumbs}>Documents</PageTitle>
-            <Documents />
-          </>
-        }
-      />
-      <Route
-        path='connections'
-        element={
-          <>
-            <PageTitle breadcrumbs={profileBreadCrumbs}>Connections</PageTitle>
-            <Connections />
-          </>
-        }
-      />
-      <Route index element={<Navigate to='/crafted/pages/profile/overview' />} />
-    </Route>
-  </Routes>
-)
+      >
+        {staff && (
+          <Route
+            path='overview'
+            element={
+              <>
+                <PageTitle breadcrumbs={profileBreadCrumbs}>Update Profile</PageTitle>
+                <Overview staff={staff} setStaff={setStaff} />
+              </>
+            }
+          />
+        )}
+        {/* <Route
+          path='projects'
+          element={
+            <>
+              <PageTitle breadcrumbs={profileBreadCrumbs}>Projects</PageTitle>
+              <Projects />
+            </>
+          }
+        />
+        <Route
+          path='campaigns'
+          element={
+            <>
+              <PageTitle breadcrumbs={profileBreadCrumbs}>Campaigns</PageTitle>
+              <Campaigns />
+            </>
+          }
+        />
+        <Route
+          path='documents'
+          element={
+            <>
+              <PageTitle breadcrumbs={profileBreadCrumbs}>Documents</PageTitle>
+              <Documents />
+            </>
+          }
+        />
+        <Route
+          path='connections'
+          element={
+            <>
+              <PageTitle breadcrumbs={profileBreadCrumbs}>Connections</PageTitle>
+              <Connections />
+            </>
+          }
+        /> */}
+        <Route index element={<Navigate to='/crafted/pages/profile/overview' />} />
+      </Route>
+    </Routes>
+  )
+}
 
 export default ProfilePage

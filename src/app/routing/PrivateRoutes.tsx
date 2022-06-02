@@ -13,12 +13,14 @@ const PrivateRoutes = () => {
   const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
   const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
-  const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'))
-  const PermissionPage = lazy(() => import('../modules/apps/permissions/PermissionPage'))
-  const RolesPage = lazy(() => import('../modules/apps/role-management/RolesPage'))
-  const StaffPage = lazy(() => import('../modules/apps/staff-management/StaffPage'))
-  const SettingPage = lazy(() => import('../modules/apps/settings/SettingPage'))
-  const QuestionPage = lazy(() => import('../modules/apps/question-bank/QuestionPage'))
+  const UsersPage = lazy(() => import('../pages/user-management/UsersPage'))
+  const PermissionPage = lazy(() => import('../pages/permissions/PermissionPage'))
+  const RolesPage = lazy(() => import('../pages/role-management/RolesPage'))
+  const StaffPage = lazy(() => import('../pages/staff-management/StaffPage'))
+  const SettingPage = lazy(() => import('../pages/settings/SettingPage'))
+  const QuestionPage = lazy(() => import('../pages/question-bank/QuestionPage'))
+  const Quiz = lazy(() => import('../pages/quiz/QuizPage'))
+  const CouponPage = lazy(() => import('../pages/coupons/CouponPage'))
 
   return (
     <Routes>
@@ -71,7 +73,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='apps/user-management/*'
+          path='users'
           element={
             <SuspensedView>
               <UsersPage />
@@ -79,7 +81,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='apps/permission-management/*'
+          path='permissions'
           element={
             <SuspensedView>
               <PermissionPage />
@@ -87,7 +89,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='apps/role-management/*'
+          path='roles'
           element={
             <SuspensedView>
               <RolesPage />
@@ -95,7 +97,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='apps/staff-management/*'
+          path='staff'
           element={
             <SuspensedView>
               <StaffPage />
@@ -103,7 +105,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='apps/settings/*'
+          path='settings/*'
           element={
             <SuspensedView>
               <SettingPage />
@@ -111,10 +113,26 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='apps/question-bank/*'
+          path='questions'
           element={
             <SuspensedView>
               <QuestionPage />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path='coupon'
+          element={
+            <SuspensedView>
+              <CouponPage />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path='quiz/*'
+          element={
+            <SuspensedView>
+              <Quiz />
             </SuspensedView>
           }
         />

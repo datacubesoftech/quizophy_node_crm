@@ -101,39 +101,51 @@ export function AsideMenuMain () {
         <AsideMenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
       </AsideMenuItemWithSub>
       <AsideMenuItem
-        to='/apps/user-management/users'
+        to='/users'
         icon='/media/icons/duotune/general/gen051.svg'
-        title='User management'
+        title='Users'
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='/apps/permission-management/permissions'
-        icon='/media/icons/duotune/general/gen051.svg'
-        title='Permission management'
+        to='/permissions'
+        icon='/media/icons/duotune/general/gen058.svg'
+        title='Permissions'
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='/apps/role-management/roles'
-        icon='/media/icons/duotune/general/gen051.svg'
-        title='Role management'
+        to='/roles'
+        icon='/media/icons/duotune/general/gen059.svg'
+        title='Roles'
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='/apps/staff-management/staff'
-        icon='/media/icons/duotune/general/gen051.svg'
-        title='Staff management'
+        to='/staff'
+        icon='/media/icons/duotune/general/gen054.svg'
+        title='Staffs'
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='/apps/settings/general'
-        icon='/media/icons/duotune/general/gen051.svg'
+        to='/settings/general'
+        icon='/media/icons/duotune/general/gen055.svg'
         title='Settings'
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='/apps/question-bank/questions'
-        icon='/media/icons/duotune/general/gen021.svg'
+        to='/questions'
+        icon='/media/icons/duotune/general/gen056.svg'
         title='Question Bank'
+        fontIcon='bi-layers'
+      />
+       <AsideMenuItem
+        to='/quiz'
+        icon='/media/icons/duotune/general/gen002.svg'
+        title='Quiz'
+        fontIcon='bi-layers'
+      />
+       <AsideMenuItem
+        to='/coupon'
+        icon='/media/icons/duotune/general/gen003.svg'
+        title='Coupons'
         fontIcon='bi-layers'
       />
       <div className='menu-item'>

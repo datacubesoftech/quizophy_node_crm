@@ -61,7 +61,7 @@ const VerifyOtp = (props) => {
             <div className="text-center mb-10">
                 <h1 className="text-dark mb-3">Two Step Verification</h1>
                 <div className="text-muted fw-bold fs-5 mb-5">Enter the verification code we sent to</div>
-                <div className="fw-bolder text-dark fs-3">{state?.phone_number}</div>
+                <div className="fw-bolder text-dark fs-3" style={{ letterSpacing: 3 }}>+91{state?.phone_number}</div>
             </div>
             <div className="mb-10">
                 <div className="fw-bolder text-start text-dark fs-6 mb-1 ms-1">Type your 6 digit security code</div>
@@ -89,7 +89,7 @@ const VerifyOtp = (props) => {
                     id="kt_sign_in_submit"
                     className="btn btn-lg btn-primary fw-bolder"
                     disabled={(otp.length < 6) || loading}>
-                    {!loading && <span className="indicator-label">Submit</span>}
+                    {!loading && <span className="indicator-label"><i className="fas fa-user-check fs-2"></i> Verify OTP</span>}
                     {loading && <span className="indicator-progress" style={{ display: 'block' }}>Please wait...
                         <span className="spinner-border spinner-border-sm align-middle ms-2"></span></span>}
                 </button>

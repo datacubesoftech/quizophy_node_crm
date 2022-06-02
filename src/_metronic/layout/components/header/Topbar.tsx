@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import React, {FC} from 'react'
+import {useAuth} from '../../../../app/modules/auth'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search} from '../../../partials'
 import {useLayout} from '../../core'
@@ -11,6 +12,7 @@ const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
 
 const Topbar: FC = () => {
   const {config} = useLayout()
+  const {currentUser, logout} = useAuth()
 
   return (
     <div className='d-flex align-items-stretch flex-shrink-0'>
@@ -101,16 +103,17 @@ const Topbar: FC = () => {
       </div>
 
       <div
-          className='d-flex align-items-center'
-          data-kt-search-element='toggle'
-          id='kt_header_search_toggle'
-        >
-          <button 
+        className='d-flex align-items-center'
+        data-kt-search-element='toggle'
+        id='kt_header_search_toggle'
+      >
+        <button
           className='btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px'
-          type='button'>
-            <KTSVG path='/media/icons/duotune/general/gen019.svg' className='svg-icon-1' />
-          </button>
-        </div>
+          type='button'
+        >
+          <KTSVG path='/media/icons/duotune/general/gen019.svg' className='svg-icon-1' />
+        </button>
+      </div>
 
       {/* begin::User */}
       <div
@@ -125,7 +128,14 @@ const Topbar: FC = () => {
           data-kt-menu-placement='bottom-end'
           data-kt-menu-flip='bottom'
         >
-          <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} alt='metronic' />
+          <img
+            src={
+              currentUser?.profile_image
+                ? currentUser.profile_image
+                : toAbsoluteUrl('/media/svg/avatars/blank.svg')
+            }
+            alt='user'
+          />
         </div>
         <HeaderUserMenu />
         {/* end::Toggle */}

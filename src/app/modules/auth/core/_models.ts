@@ -48,12 +48,14 @@ export interface UserModel {
   username: string
   password: string | undefined
   email: string
+  admin: number
   first_name: string
   last_name: string
+  profile_image: string
   fullname?: string
   occupation?: string
   companyName?: string
-  phone?: string
+  phone_number?: string
   roles?: Array<number>
   pic?: string
   language?: 'en' | 'de' | 'es' | 'fr' | 'ja' | 'zh' | 'ru'
