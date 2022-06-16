@@ -16,6 +16,7 @@ type Props = {
 }
 
 const Step1: FC<Props> = ({setFieldValue, values, touched, setFieldError, errors}) => {
+  console.log(errors, 'errors')
   const [courses, setCourses] = useState([])
   const [subjects, setSubjects] = useState([])
   const [selectedCourses, setSelectedCourses] = useState<any>(null)
@@ -133,9 +134,8 @@ const Step1: FC<Props> = ({setFieldValue, values, touched, setFieldError, errors
             getOptionLabel={(option: any) => option.course_name}
             getOptionValue={(option: any) => option.id}
           />
-          <div className='text-danger'>
-            <ErrorMessage name='courses' />
-          </div>
+
+          <div className='text-danger mt-2'>{errors.courses}</div>
         </div>
         <div className='fv-row w-100 flex-md-root'>
           <label className='d-flex align-items-center form-label'>

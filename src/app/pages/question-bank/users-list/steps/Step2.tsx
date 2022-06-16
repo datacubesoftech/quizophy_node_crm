@@ -12,9 +12,17 @@ type Props = {
   setSelectedLang: any
   selectedLang: any
   roleForEdit: any
+  errors: any
 }
 
-const Step2: FC<Props> = ({values, setFieldValue, selectedLang, setSelectedLang, roleForEdit}) => {
+const Step2: FC<Props> = ({
+  values,
+  setFieldValue,
+  selectedLang,
+  setSelectedLang,
+  errors,
+  roleForEdit,
+}) => {
   console.log(values, 'values')
 
   const [options, setOptions] = useState<any>(null)
@@ -33,9 +41,8 @@ const Step2: FC<Props> = ({values, setFieldValue, selectedLang, setSelectedLang,
 
   useEffect(() => {
     if (selectedLang != null) {
-      debugger
       setOptions(values.questions[selectedLang]?.options || [{option: '', right_option: 0}])
-      setQuestion(values.questions[selectedLang]?.question || {question: ''})
+      setQuestion(values.questions[selectedLang]?.question || '')
       setSolution(values.questions[selectedLang]?.solution || {solution: ''})
       setHint(values.questions[selectedLang]?.hint || {hint: ''})
       setFieldValue(`questions[${selectedLang}].verified`, {is_verified: null, verified_by: ''})
@@ -89,15 +96,6 @@ const Step2: FC<Props> = ({values, setFieldValue, selectedLang, setSelectedLang,
         .then((data: AxiosResponse<any>) => {
           var range = questionRef.current.getEditor().getSelection()
           questionRef.current.getEditor().insertEmbed(range?.index, 'image', data.data)
-          // if (questionRef.current.props.id == 'question') {
-          //   questionRef.current.getEditor().insertEmbed(null, 'image', data.data)
-          // }
-          // if (questionRef.current.props.id == 'solution') {
-          //   solutionRef.current.getEditor().insertEmbed(null, 'image', data.data)
-          // }
-          // if (questionRef.current.props.id == 'option') {
-          //   optionRef.current.getEditor().insertEmbed(null, 'image', data.data)
-          // }
         })
         .catch((err) => {
           console.log(err, 'err')
@@ -177,9 +175,9 @@ const Step2: FC<Props> = ({values, setFieldValue, selectedLang, setSelectedLang,
               modules={modules}
               ref={questionRef}
             />
-            {/* <div className='text-danger mt-2'>
-              <ErrorMessage name='question.question' />
-            </div> */}
+            {errors?.questions && (
+              <div className='text-danger mt-2'>{errors?.questions[selectedLang]?.question}</div>
+            )}
           </div>
           <div className='fv-row w-100 mb-10'>
             <label className='form-label required'>Solution</label>
@@ -193,9 +191,11 @@ const Step2: FC<Props> = ({values, setFieldValue, selectedLang, setSelectedLang,
               modules={modules}
               ref={questionRef}
             />
-            {/* <div className='text-danger mt-2'>
-              <ErrorMessage name='question.solution' />
-            </div> */}
+            {errors?.questions && (
+              <div className='text-danger mt-2'>
+                {errors?.questions[selectedLang]?.solution?.solution}
+              </div>
+            )}
           </div>
           <div className='fv-row w-100 mb-10'>
             <label className='form-label required'>Question Hint</label>
@@ -207,9 +207,9 @@ const Step2: FC<Props> = ({values, setFieldValue, selectedLang, setSelectedLang,
               }}
               value={hint?.hint}
             />
-            {/* <div className='text-danger mt-2'>
-              <ErrorMessage name='question.hint' />
-            </div> */}
+            {errors?.questions && (
+              <div className='text-danger mt-2'>{errors?.questions[selectedLang]?.hint?.hint}</div>
+            )}
           </div>
           <div className='fv-row w-100 mb-10'>
             <div id='kt_ecommerce_add_category_conditions'>

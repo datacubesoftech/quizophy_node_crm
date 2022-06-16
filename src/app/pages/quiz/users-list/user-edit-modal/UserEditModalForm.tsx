@@ -5,10 +5,7 @@ import {isNotEmpty, KTSVG} from '../../../../../_metronic/helpers'
 import {createAccountSchemas, initialUser, User} from '../core/_models'
 import {useListView} from '../core/ListViewProvider'
 import {UsersListLoading} from '../components/loading/UsersListLoading'
-import {
-  createQuizSetting,
-  createUser,
-} from '../core/_requests'
+import {createQuizSetting, createUser} from '../core/_requests'
 import {useQueryResponse} from '../core/QueryResponseProvider'
 import Swal from 'sweetalert2'
 import {StepperComponent} from '../../../../../_metronic/assets/ts/components'
@@ -31,6 +28,7 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
     ...role,
     subject_id: role.subject_id || initialUser.subject_id,
     name: role.name || initialUser.name,
+    quiz_type_id: role.quiz_type_id || initialUser.quiz_type_id,
     marks: role.marks || initialUser.marks,
     duration: role.duration || initialUser.duration,
     total_questions: role.total_questions || initialUser.total_questions,
@@ -70,7 +68,7 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
 
     stepper.current.goPrev()
 
-    // setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex - 1])
+    setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex - 1])
   }
 
   const submitStep = async (values: User, actions: FormikValues) => {
@@ -78,7 +76,7 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
       return
     }
     setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1)
-    // setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex])
+    setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex])
     if (stepper.current.currentStepIndex !== stepper.current.totatStepsNumber) {
       const quiz = await createUser(values)
       actions.setFieldValue('id', quiz?.id)
@@ -119,7 +117,7 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
         </div>
 
         <Formik
-          // validationSchema={currentSchema}
+          validationSchema={currentSchema}
           initialValues={roleForEdit}
           onSubmit={submitStep}
           validateOnChange={false}
@@ -143,6 +141,7 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
                   selectedLang={selectedLang}
                   setSelectedLang={setSelectedLang}
                   roleForEdit={roleForEdit}
+                  errors={errors}
                 />
               </div>
 

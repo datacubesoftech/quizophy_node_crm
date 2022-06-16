@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 export type User = {
   id?: ID
   subject_id?: number
+  quiz_type_id?: number
   question_type_id?: number
   name?: string
   duration?: number
@@ -20,64 +21,29 @@ export type UsersQueryResponse = Response<Array<User>>
 
 const createAccountSchemas = [
   Yup.object().shape({
-    firstname: Yup.string()
-      .required('First name is required')
-      .label('first_name'),
-    lastname: Yup.string()
-      .required('Last name is required')
-      .label('last_name'),
-    email: Yup.string()
-      .email('Wrong email format')
-      .required('Email is required')
-      .label('email'),
-    phone: Yup.string()
-      // .positive()
-      .length(10)
-      .matches(
-        /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-        'Phone number is not valid'
-      )
-      .required('Phone number is required')
-      .label('phone'),
-    password: Yup.string()
-      .required('Password is required')
-      .label('password'),
-    dob: Yup.string().required('Dob is required'),
-    address: Yup.object().shape({
-      city: Yup.string().required('City is required'),
-      district: Yup.string().required('District is required'),
-      state: Yup.string().required('State is required'),
-    }),
-    device: Yup.array().of(
-      Yup.object().shape({
-        device_id: Yup.string().required('Device Id is required'),
-        device_token: Yup.string().required('Device Token is required'),
-      })
-    ),
-    touchId_enable: Yup.number().required('Fingure Print is required'),
-    // profile_image: Yup.object().label('profile_image')
+    name: Yup.string().required('Name is required'),
+    quiz_type_id: Yup.number().required('Quiz Type is required'),
+    courses: Yup.array().min(1),
+    subject_id: Yup.number().required('Subject id is required'),
+    duration: Yup.number().required('Quiz duration is required'),
+    language: Yup.string().required('Quiz language is required'),
+    total_questions: Yup.number().required('Total questions is required'),
+    marks: Yup.number().required('Marks are required'),
   }),
   Yup.object().shape({
-    bank: Yup.object().shape({
-      account_number: Yup.string().required('Account Number is required'),
-      ifsc_code: Yup.string().required('IFSC code is required'),
-      bank_name: Yup.string().required('Bank Name is required'),
-      branch_name: Yup.string().required('Branch Name is required'),
-      state: Yup.string().required('State is required'),
+    dates: Yup.object().shape({
+      question_time: Yup.number().required('Question time is required'),
+      reg_open_date: Yup.date().required('Registration open date is required'),
+      start_date: Yup.date().required('Start date is required'),
+      result_publish_date: Yup.date().required('Result publish date is required'),
     }),
-  }),
-  Yup.object().shape({
-    upi: Yup.object().shape({
-      upi_id: Yup.string().required('Upi Id is required'),
-      name: Yup.string().required('Name is required'),
-      father_name: Yup.string().required('Father name is required'),
-    }),
-  }),
-  Yup.object().shape({
-    pan: Yup.object().shape({
-      name: Yup.string().required('Name is required'),
-      pannumber: Yup.string().required('Pan number is required'),
-      dob: Yup.string().required('DOB is required'),
+    prize: Yup.object().shape({
+      total_spots: Yup.number().required('Total spots is required'),
+      entry_fee: Yup.number().required('Entry fee is required'),
+      total_winner_percentage: Yup.number().required('Winner percentage is required'),
+      prize_distribution_percentage: Yup.number().required('Prize distribution is required'),
+      // prize_pool: Yup.number().required('Prize pool is required'),
+      // first_prize: Yup.number().required('First prize is required'),
     }),
   }),
 ]
@@ -85,6 +51,7 @@ const createAccountSchemas = [
 export const initialUser: User = {
   id: undefined,
   subject_id: undefined,
+  quiz_type_id: undefined,
   question_type_id: undefined,
   courses: [],
   marks: undefined,

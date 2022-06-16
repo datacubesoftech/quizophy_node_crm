@@ -59,7 +59,7 @@ const Step2: FC<Props> = ({values, setFieldValue}) => {
             }}
           />
           <div className='text-danger'>
-            <ErrorMessage name='coupon_uses.max_user' />
+            <ErrorMessage name='coupon_dates.start_date' />
           </div>
         </div>
         <div className='fv-row w-100 flex-md-root'>
@@ -76,7 +76,7 @@ const Step2: FC<Props> = ({values, setFieldValue}) => {
             }}
           />
           <div className='text-danger'>
-            <ErrorMessage name='coupon_uses.max_use_per_user' />
+            <ErrorMessage name='coupon_dates.exp_date' />
           </div>
         </div>
       </div>

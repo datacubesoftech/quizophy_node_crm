@@ -65,7 +65,7 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
 
     stepper.current.goPrev()
 
-    // setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex - 1])
+    setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex - 1])
   }
 
   const submitStep = async (values: User, actions: FormikValues) => {
@@ -73,7 +73,7 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
       return
     }
     setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1)
-    // setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex])
+    setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex])
     if (stepper.current.currentStepIndex !== stepper.current.totatStepsNumber) {
       const user = await createUser(values)
       actions.setFieldValue('id', user?.id)
@@ -94,7 +94,7 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
         cancel(true)
         Swal.fire({
           title: 'Success!',
-          text: `User ${values.id ? 'Updated' : 'Created'}!`,
+          text: `Coupon ${values.id ? 'Updated' : 'Created'}!`,
           icon: 'success',
           confirmButtonText: 'Okay',
         })
@@ -120,7 +120,7 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
         </div>
 
         <Formik
-          // validationSchema={currentSchema}
+          validationSchema={currentSchema}
           initialValues={roleForEdit}
           onSubmit={submitStep}
           validateOnChange={false}

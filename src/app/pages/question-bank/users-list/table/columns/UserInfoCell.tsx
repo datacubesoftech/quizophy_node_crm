@@ -40,8 +40,8 @@ const UserInfoCell: FC<Props> = ({user}) => {
         </a>
       </div> */}
       <div className='d-flex flex-column'>
-        {user.questions.length > 0 &&
-          user.questions.map((item: any, i: any) => (
+        {user?.questions?.length > 0 &&
+          user?.questions?.map((item: any, i: any) => (
             <a
               key={i}
               onClick={openEditModal}

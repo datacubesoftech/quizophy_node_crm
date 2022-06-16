@@ -13,6 +13,7 @@ type Props = {
 }
 
 const Step1: FC<Props> = ({setFieldValue, values}) => {
+  console.log(values)
   const availForPurchase = [
     {id: 1, value: 'All', label: 'All'},
     {id: 2, value: '1st', label: '1st'},
@@ -28,7 +29,7 @@ const Step1: FC<Props> = ({setFieldValue, values}) => {
   const questionRef: any = useRef(null)
 
   useEffect(() => {
-    if (description != undefined) {
+    if (description != undefined || description != null) {
       setFieldValue('description', description)
     }
   }, [description])
@@ -144,7 +145,7 @@ const Step1: FC<Props> = ({setFieldValue, values}) => {
         </div>
         <div className='fv-row w-100 flex-md-root'>
           <label className='d-flex align-items-center form-label'>
-            <span className='required'>Coupon can apply for purchase</span>
+            <span className=''>Coupon can apply for purchase</span>
           </label>
           <Select
             isMulti
@@ -166,9 +167,7 @@ const Step1: FC<Props> = ({setFieldValue, values}) => {
 
       <div className='d-flex flex-wrap gap-5 mb-10'>
         <div className='fv-row w-100 flex-md-root'>
-          <label className='fs-6 fw-bold form-label required'>
-            Coupon Visible on Student Portal
-          </label>
+          <label className='fs-6 fw-bold form-label'>Coupon Visible on Student Portal</label>
 
           <Field name='visible_on_app' as='select' className='form-select mb-2' placeholder={''}>
             <option value={1}>Yes</option>
@@ -210,7 +209,7 @@ const Step1: FC<Props> = ({setFieldValue, values}) => {
         </div>
       </div>
       <div className='fv-row w-100 mb-10'>
-        <label className='form-label required'>Description</label>
+        <label className='form-label'>Description</label>
         <ReactQuill
           onChange={(content, delta, source, editor) => {
             setDescription(content)
@@ -221,9 +220,6 @@ const Step1: FC<Props> = ({setFieldValue, values}) => {
           modules={modules}
           ref={questionRef}
         />
-        {/* <div className='text-danger mt-2'>
-              <ErrorMessage name='description.description' />
-            </div> */}
       </div>
     </div>
   )

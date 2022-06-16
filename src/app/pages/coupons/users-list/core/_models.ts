@@ -18,64 +18,29 @@ export type UsersQueryResponse = Response<Array<User>>
 
 const createAccountSchemas = [
   Yup.object().shape({
-    firstname: Yup.string()
-      .required('First name is required')
-      .label('first_name'),
-    lastname: Yup.string()
-      .required('Last name is required')
-      .label('last_name'),
-    email: Yup.string()
-      .email('Wrong email format')
-      .required('Email is required')
-      .label('email'),
-    phone: Yup.string()
-      // .positive()
-      .length(10)
-      .matches(
-        /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-        'Phone number is not valid'
-      )
-      .required('Phone number is required')
-      .label('phone'),
-    password: Yup.string()
-      .required('Password is required')
-      .label('password'),
-    dob: Yup.string().required('Dob is required'),
-    address: Yup.object().shape({
-      city: Yup.string().required('City is required'),
-      district: Yup.string().required('District is required'),
-      state: Yup.string().required('State is required'),
-    }),
-    device: Yup.array().of(
-      Yup.object().shape({
-        device_id: Yup.string().required('Device Id is required'),
-        device_token: Yup.string().required('Device Token is required'),
-      })
-    ),
-    touchId_enable: Yup.number().required('Fingure Print is required'),
-    // profile_image: Yup.object().label('profile_image')
+    coupon_title: Yup.string()
+      .required('Coupon title is required')
+      .label('Coupon Title'),
+    coupon_code: Yup.string()
+      .required('Coupon code is required')
+      .label('Coupon Code'),
+    percentage: Yup.number()
+      .required('Percentage is required')
+      .label('Percentage Amount'),
+    minimum_order_price: Yup.number()
+      .required('Minimum Order is required')
+      .label('minimum_order_price'),
   }),
   Yup.object().shape({
-    bank: Yup.object().shape({
-      account_number: Yup.string().required('Account Number is required'),
-      ifsc_code: Yup.string().required('IFSC code is required'),
-      bank_name: Yup.string().required('Bank Name is required'),
-      branch_name: Yup.string().required('Branch Name is required'),
-      state: Yup.string().required('State is required'),
+    coupon_uses: Yup.object().shape({
+      max_user: Yup.number().required('Max User is required'),
+      max_use_per_user: Yup.number().required('max_use_per_user is required'),
     }),
   }),
   Yup.object().shape({
-    upi: Yup.object().shape({
-      upi_id: Yup.string().required('Upi Id is required'),
-      name: Yup.string().required('Name is required'),
-      father_name: Yup.string().required('Father name is required'),
-    }),
-  }),
-  Yup.object().shape({
-    pan: Yup.object().shape({
-      name: Yup.string().required('Name is required'),
-      pannumber: Yup.string().required('Pan number is required'),
-      dob: Yup.string().required('DOB is required'),
+    coupon_dates: Yup.object().shape({
+      start_date: Yup.date().required('Start date is required'),
+      exp_date: Yup.date().required('Expiry date is required'),
     }),
   }),
 ]
@@ -88,7 +53,7 @@ export const initialUser: User = {
   minimum_order_price: undefined,
   avail_on_purchase: '',
   visible_on_app: undefined,
-  description: undefined,
+  description: '',
   coupon_uses: {
     max_user: undefined,
   },

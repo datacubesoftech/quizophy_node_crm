@@ -136,18 +136,28 @@ export function AsideMenuMain () {
         title='Question Bank'
         fontIcon='bi-layers'
       />
-       <AsideMenuItem
+      <AsideMenuItem
         to='/quiz'
         icon='/media/icons/duotune/general/gen002.svg'
         title='Quiz'
         fontIcon='bi-layers'
       />
-       <AsideMenuItem
+      <AsideMenuItem
         to='/coupon'
         icon='/media/icons/duotune/general/gen003.svg'
         title='Coupons'
         fontIcon='bi-layers'
       />
+      <AsideMenuItemWithSub
+        to='/sponsor'
+        title='Sponsorship'
+        fontIcon='bi-chat-left'
+        icon='/media/icons/duotune/communication/com012.svg'
+      >
+        <AsideMenuItem to='/sponsor/sponsors' title='Sponsors' hasBullet={true} />
+        <AsideMenuItem to='/sponsor/programs' title='Program' hasBullet={true} />
+        <AsideMenuItem to='/sponsor/subscriptions' title='Subscriptions' hasBullet={true} />
+      </AsideMenuItemWithSub>
       <div className='menu-item'>
         <div className='menu-content'>
           <div className='separator mx-1 my-4'></div>

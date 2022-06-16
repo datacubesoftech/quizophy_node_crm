@@ -9,9 +9,17 @@ type Props = {
   setSelectedLang: any
   selectedLang: any
   roleForEdit: any
+  errors: any
 }
 
-const Step2: FC<Props> = ({values, setFieldValue, selectedLang, setSelectedLang, roleForEdit}) => {
+const Step2: FC<Props> = ({
+  values,
+  setFieldValue,
+  selectedLang,
+  errors,
+  setSelectedLang,
+  roleForEdit,
+}) => {
   console.log(values, 'values')
   return (
     <div className='w-100'>
@@ -46,15 +54,7 @@ const Step2: FC<Props> = ({values, setFieldValue, selectedLang, setSelectedLang,
               setFieldValue('dates.start_date', date)
             }}
           />
-          {/* <Field
-            name='dates.start_date'
-            type={'date'}
-            className='form-control mb-2'
-            placeholder={'Enter negitive mark'}
-          /> */}
-          <div className='text-danger mt-2'>
-            <ErrorMessage name='dates.start_date' />
-          </div>
+          <div className='text-danger mt-2'>{errors?.dates?.start_date}</div>
         </div>
       </div>
 
@@ -74,9 +74,7 @@ const Step2: FC<Props> = ({values, setFieldValue, selectedLang, setSelectedLang,
             }}
             // validate={validateEmail}
           />
-          <div className='text-danger mt-2'>
-            <ErrorMessage name='dates.reg_open_date' />
-          </div>
+          <div className='text-danger mt-2'>{errors?.dates?.reg_open_date}</div>
         </div>
 
         <div className='fv-row w-100 flex-md-root'>
@@ -97,9 +95,7 @@ const Step2: FC<Props> = ({values, setFieldValue, selectedLang, setSelectedLang,
               setFieldValue('dates.result_publish_date', date)
             }}
           />
-          <div className='text-danger mt-2'>
-            <ErrorMessage name='dates.result_publish_date' />
-          </div>
+          <div className='text-danger mt-2'>{errors?.dates?.result_publish_date}</div>
         </div>
       </div>
 

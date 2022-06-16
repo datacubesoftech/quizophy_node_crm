@@ -21,6 +21,7 @@ const PrivateRoutes = () => {
   const QuestionPage = lazy(() => import('../pages/question-bank/QuestionPage'))
   const Quiz = lazy(() => import('../pages/quiz/QuizPage'))
   const CouponPage = lazy(() => import('../pages/coupons/CouponPage'))
+  const SponsorPage = lazy(() => import('../pages/sponsors/SponsorPage'))
 
   return (
     <Routes>
@@ -133,6 +134,14 @@ const PrivateRoutes = () => {
           element={
             <SuspensedView>
               <Quiz />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path='sponsor/*'
+          element={
+            <SuspensedView>
+              <SponsorPage />
             </SuspensedView>
           }
         />
