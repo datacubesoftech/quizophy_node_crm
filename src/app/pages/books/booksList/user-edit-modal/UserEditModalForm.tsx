@@ -7,9 +7,11 @@ import {UsersListLoading} from '../components/loading/UsersListLoading'
 import {createUser} from '../core/_requests'
 import {useQueryResponse} from '../core/QueryResponseProvider'
 import Swal from 'sweetalert2'
-import ReactQuill from 'react-quill'
+import {useCommonData} from '../../commonData/CommonDataProvider'
+import ReactSelect from 'react-select'
 import axios, {AxiosResponse} from 'axios'
 import {API_URL} from '../../../settings/components/ApiUrl'
+import ReactQuill from 'react-quill'
 
 type Props = {
   isUserLoading: boolean
@@ -18,20 +20,32 @@ type Props = {
 
 const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
   const {setItemIdForUpdate} = useListView()
+  const {allCourses} = useCommonData()
   const {refetch} = useQueryResponse()
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
+  const [selectedCourses, setSelectedCourses] = useState<any>(null)
   const [roleForEdit, setRoleForEdit] = useState<User>({
     ...role,
     id: role.id || initialUser.id,
     name: role.name || initialUser.name,
-    mobile_number: role.mobile_number || initialUser.mobile_number,
-    email: role.email || initialUser.email,
-    logo: role.logo || initialUser.logo,
-    link: role.link || initialUser.link,
     description: role.description || initialUser.description,
+    image: role.image || initialUser.image,
+    book_pdf: role.book_pdf || initialUser.book_pdf,
+    new_release: role.new_release || initialUser.new_release,
+    courses: role.courses || initialUser.courses,
+    type: role.type || initialUser.type,
+    amount: role.amount || initialUser.amount,
   })
-
   const questionRef: any = useRef(null)
+
+  useEffect(() => {
+    if (roleForEdit.id && allCourses.length > 0) {
+      const selected = allCourses.filter((x: any) =>
+        roleForEdit?.courses.some((y: any) => y.course_id == x.id)
+      )
+      setSelectedCourses(selected)
+    }
+  }, [allCourses])
 
   const cancel = (withRefresh?: boolean) => {
     if (withRefresh) {
@@ -42,14 +56,13 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
 
   const submitStep = async (values: User, actions: FormikValues) => {
     try {
-      values.logo = roleForEdit.logo
       values.description = roleForEdit.description
       await createUser(values)
       actions.resetForm()
       cancel(true)
       Swal.fire({
         title: 'Success!',
-        text: `Sponsor Updated!`,
+        text: `Book Updated!`,
         icon: 'success',
         confirmButtonText: 'Okay',
       })
@@ -66,7 +79,7 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
     await axios
       .post(`${API_URL}/upload`, fd)
       .then((data: AxiosResponse<any>) => {
-        setRoleForEdit({...roleForEdit, logo: data.data})
+        setRoleForEdit({...roleForEdit, image: data.data})
       })
       .catch((err) => {
         console.log(err, 'err')
@@ -135,17 +148,17 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
           onSubmit={submitStep}
           validateOnChange={false}
         >
-          {() => (
+          {({setFieldValue}) => (
             <Form className='mx-auto mw-700px w-100 pt-5 pb-10' id='kt_create_account_form'>
               <div className='fv-row mb-7'>
-                <label className='d-block form-label'>Sponsor's Logo</label>
+                <label className='d-block form-label'>Book Thumbnail</label>
                 <div className='image-input image-input-outline' data-kt-image-input='true'>
                   <div className=''>
                     <img
                       src={
-                        roleForEdit?.logo == null || roleForEdit?.logo == ''
+                        roleForEdit?.image == null || roleForEdit?.image == ''
                           ? toAbsoluteUrl('/media/svg/avatars/blank.svg')
-                          : roleForEdit?.logo
+                          : roleForEdit?.image
                       }
                       alt='avatar'
                       className='image-input-wrapper w-125px h-125px'
@@ -166,14 +179,14 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
                     />
                     <input type='hidden' name='avatar_remove' />
                   </label>
-                  {roleForEdit.logo !== null && (
+                  {roleForEdit.image !== '' && (
                     <button
                       className='btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow'
                       data-kt-image-input-action='remove'
                       data-bs-toggle='tooltip'
                       title='Remove avatar'
                       type='button'
-                      onClick={() => setRoleForEdit({...roleForEdit, logo: ''})}
+                      onClick={() => setRoleForEdit({...roleForEdit, image: ''})}
                     >
                       <i className='bi bi-x fs-2'></i>
                     </button>
@@ -183,54 +196,94 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
               </div>
               <div className='d-flex flex-wrap gap-5 mb-10'>
                 <div className='fv-row w-100 flex-md-root'>
-                  <label className='form-label required'>Full Name</label>
+                  <label className='form-label required'>Select Courses</label>
+                  <ReactSelect
+                    isMulti
+                    name='courses'
+                    options={allCourses}
+                    className='basic-multi-select'
+                    classNamePrefix='select'
+                    value={selectedCourses}
+                    onChange={(e: any) => {
+                      setFieldValue('courses', e)
+                      setSelectedCourses(e)
+                    }}
+                    getOptionLabel={(option: any) => option.course_name}
+                    getOptionValue={(option: any) => option.id}
+                  />
+                  <div className='text-danger mt-2'>
+                    <ErrorMessage name='courses' />
+                  </div>
+                </div>
+                <div className='fv-row w-100 flex-md-root'>
+                  <label className='d-flex align-items-center form-label'>
+                    <span className='required'>Book Name</span>
+                  </label>
 
                   <Field
                     name='name'
                     className='form-control mb-2'
-                    placeholder={'Enter Full Name'}
+                    placeholder={'Enter Book Name'}
                   />
                   <div className='text-danger mt-2'>
                     <ErrorMessage name='name' />
                   </div>
                 </div>
+              </div>
+              <div className='d-flex flex-wrap gap-5 mb-10'>
+                <div className='fv-row w-100 flex-md-root'>
+                  <label className='form-label'>Book Price</label>
+
+                  <Field
+                    name='amount'
+                    type='number'
+                    className='form-control mb-2'
+                    placeholder={'Enter Book Price'}
+                  />
+                  <div className='text-danger mt-2'>
+                    <ErrorMessage name='amount' />
+                  </div>
+                </div>
                 <div className='fv-row w-100 flex-md-root'>
                   <label className='d-flex align-items-center form-label'>
-                    <span className='required'>Email</span>
+                    <span className='required'>Book Type</span>
                   </label>
 
-                  <Field name='email' className='form-control mb-2' placeholder={'Enter Email'} />
+                  <Field
+                    name='type'
+                    as='select'
+                    className='form-select mb-2'
+                    placeholder={'select book type '}
+                  >
+                    <option>FREE</option>
+                    <option>PAID</option>
+                  </Field>
                   <div className='text-danger mt-2'>
-                    <ErrorMessage name='email' />
+                    <ErrorMessage name='type' />
                   </div>
                 </div>
               </div>
               <div className='d-flex flex-wrap gap-5 mb-10'>
                 <div className='fv-row w-100 flex-md-root'>
-                  <label className='form-label'>Website Link</label>
-
-                  <Field
-                    name='link'
-                    className='form-control mb-2'
-                    placeholder={'Enter Website Link'}
-                  />
-                  <div className='text-danger mt-2'>
-                    <ErrorMessage name='link' />
-                  </div>
+                  <label className='form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15'>
+                    <Field className='form-check-input' type='checkbox' name='new_release' />
+                    <span className='form-check-label fs-15 fw-bold'>
+                      Show in New Release Section
+                    </span>
+                  </label>
                 </div>
                 <div className='fv-row w-100 flex-md-root'>
                   <label className='d-flex align-items-center form-label'>
-                    <span className='required'>Mobile Number</span>
+                    <span className='required'>Book PDF URL</span>
                   </label>
 
                   <Field
-                    name='mobile_number'
-                    type='number'
+                    name='book_pdf'
                     className='form-control mb-2'
-                    placeholder={'Enter Mobile Number'}
+                    placeholder={'Enter pdf url'}
                   />
                   <div className='text-danger mt-2'>
-                    <ErrorMessage name='mobile_number' />
+                    <ErrorMessage name='book_pdf' />
                   </div>
                 </div>
               </div>

@@ -158,6 +158,28 @@ export function AsideMenuMain () {
         <AsideMenuItem to='/sponsor/programs' title='Program' hasBullet={true} />
         <AsideMenuItem to='/sponsor/subscriptions' title='Subscriptions' hasBullet={true} />
       </AsideMenuItemWithSub>
+      <AsideMenuItemWithSub
+        to='/sales'
+        title='Sales'
+        fontIcon='bi-chat-left'
+        icon='/media/icons/duotune/communication/com013.svg'
+      >
+        <AsideMenuItem to='/sales/wallet' title='Wallet' hasBullet={true} />
+        <AsideMenuItem to='/sales/withdrawal' title='Withdrawal' hasBullet={true} />
+        <AsideMenuItem to='/sales/payment-support' title='Payment Support' hasBullet={true} />
+      </AsideMenuItemWithSub>
+      <AsideMenuItem
+        to='/books'
+        icon='/media/icons/duotune/general/gen005.svg'
+        title='Books'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='/feedback'
+        icon='/media/icons/duotune/general/gen006.svg'
+        title='Feedbacks'
+        fontIcon='bi-layers'
+      />
       <div className='menu-item'>
         <div className='menu-content'>
           <div className='separator mx-1 my-4'></div>

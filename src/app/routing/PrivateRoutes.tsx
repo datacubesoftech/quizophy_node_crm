@@ -22,6 +22,9 @@ const PrivateRoutes = () => {
   const Quiz = lazy(() => import('../pages/quiz/QuizPage'))
   const CouponPage = lazy(() => import('../pages/coupons/CouponPage'))
   const SponsorPage = lazy(() => import('../pages/sponsors/SponsorPage'))
+  const SalesPage = lazy(() => import('../pages/sales/SalesPage'))
+  const BookPage = lazy(() => import('../pages/books/BookPage'))
+  const FeedbackPage = lazy(() => import('../pages/feedback/FeedbackPage'))
 
   return (
     <Routes>
@@ -142,6 +145,30 @@ const PrivateRoutes = () => {
           element={
             <SuspensedView>
               <SponsorPage />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path='sales/*'
+          element={
+            <SuspensedView>
+              <SalesPage />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path='books'
+          element={
+            <SuspensedView>
+              <BookPage />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path='feedback'
+          element={
+            <SuspensedView>
+              <FeedbackPage />
             </SuspensedView>
           }
         />
