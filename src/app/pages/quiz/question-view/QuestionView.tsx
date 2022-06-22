@@ -4,6 +4,7 @@ import {QueryResponseProvider} from './core/QueryResponseProvider'
 import {UsersListHeader} from './components/header/UsersListHeader'
 import {UsersTable} from './table/UsersTable'
 import {KTCard} from '../../../../_metronic/helpers'
+import {CommonDataProvider} from '../commonData/CommonDataProvider'
 
 const QuestionList = () => {
   const {itemIdForUpdate} = useListView()
@@ -21,7 +22,9 @@ const QuestionViewWrapper = () => (
   <QueryRequestProvider>
     <QueryResponseProvider>
       <ListViewProvider>
-        <QuestionList />
+        <CommonDataProvider>
+          <QuestionList />
+        </CommonDataProvider>
       </ListViewProvider>
     </QueryResponseProvider>
   </QueryRequestProvider>

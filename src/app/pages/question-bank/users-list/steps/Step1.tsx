@@ -5,6 +5,7 @@ import PasswordStrengthBar from 'react-password-strength-bar'
 import axios, {AxiosResponse} from 'axios'
 import {API_URL} from '../../../settings/components/ApiUrl'
 import Select from 'react-select'
+import {useCommonData} from '../commonData/CommonDataProvider'
 // import {checkEmail} from '../core/_requests'
 
 type Props = {
@@ -17,19 +18,10 @@ type Props = {
 
 const Step1: FC<Props> = ({setFieldValue, values, touched, setFieldError, errors}) => {
   console.log(errors, 'errors')
-  const [courses, setCourses] = useState([])
-  const [subjects, setSubjects] = useState([])
+  const {allCourses, allSubjects} = useCommonData()
+  const [courses, setCourses] = useState(allCourses)
+  const [subjects, setSubjects] = useState(values.id ? allSubjects : [])
   const [selectedCourses, setSelectedCourses] = useState<any>(null)
-
-  const options = [
-    {id: 1, value: 'chocolate', label: 'Chocolate'},
-    {id: 2, value: 'strawberry', label: 'Strawberry'},
-    {id: 3, value: 'vanilla', label: 'Vanilla'},
-  ]
-
-  useEffect(() => {
-    getCourses()
-  }, [])
 
   useEffect(() => {
     if (values.id && courses.length > 0) {
@@ -43,28 +35,9 @@ const Step1: FC<Props> = ({setFieldValue, values, touched, setFieldError, errors
     }
   }, [courses])
 
-  const getCourses = async () => {
-    await axios
-      .get('http://localhost:3000/questionBank/courses')
-      .then((data: AxiosResponse<any>) => {
-        console.log(data.data, 'data')
-        setCourses(data.data)
-      })
-      .catch((err) => {
-        console.log(err, 'err')
-      })
-  }
-
   const getSubject = async (ids: any) => {
-    await axios
-      .post('http://localhost:3000/questionBank/subjects', {ids})
-      .then((data: AxiosResponse<any>) => {
-        console.log(data.data, 'datasubj')
-        setSubjects(data.data)
-      })
-      .catch((err) => {
-        console.log(err, 'err')
-      })
+    let items = allSubjects?.filter((x: any) => ids.some((y: any) => y == x.course_id))
+    setSubjects(items)
   }
 
   return (
@@ -150,7 +123,7 @@ const Step1: FC<Props> = ({setFieldValue, values, touched, setFieldError, errors
             placeholder='Select an option'
           >
             <option></option>
-            {subjects.map((item: any, i) => (
+            {subjects.map((item: any, i: any) => (
               <option key={i} value={item.id}>
                 {item.subject_name}
               </option>

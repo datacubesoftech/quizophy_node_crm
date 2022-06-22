@@ -5,6 +5,7 @@ import {UsersListHeader} from './components/header/UsersListHeader'
 import {UsersTable} from './table/UsersTable'
 import {UserEditModal} from './user-edit-modal/UserEditModal'
 import {KTCard} from '../../../../_metronic/helpers'
+import {CommonDataProvider} from './commonData/CommonDataProvider'
 
 const UsersList = () => {
   const {itemIdForUpdate} = useListView()
@@ -23,7 +24,9 @@ const UsersListWrapper = () => (
   <QueryRequestProvider>
     <QueryResponseProvider>
       <ListViewProvider>
-        <UsersList />
+        <CommonDataProvider>
+          <UsersList />
+        </CommonDataProvider>
       </ListViewProvider>
     </QueryResponseProvider>
   </QueryRequestProvider>

@@ -10,7 +10,6 @@ type Props = {
 }
 
 const UserInfoCell: FC<Props> = ({user}) => {
-  console.log(user, 'user')
   const {setItemIdForUpdate} = useListView()
 
   const openEditModal = () => {
@@ -25,20 +24,6 @@ const UserInfoCell: FC<Props> = ({user}) => {
 
   return (
     <div className='d-flex align-items-center'>
-      {/* begin:: Avatar */}
-      {/* <div className='symbol symbol-circle symbol-50px overflow-hidden me-3'>
-        <a onClick={openEditModal} style={{cursor: 'pointer'}}>
-          {user.profile_image ? (
-            <div className='symbol-label'>
-              <img src={user.profile_image} alt={user.firstname} className='w-100' />
-            </div>
-          ) : (
-            <div className={clsx('symbol-label fs-3', `bg-light-warning`, `text-warning`)}>
-              {user.firstname?.charAt(0)}
-            </div>
-          )}
-        </a>
-      </div> */}
       <div className='d-flex flex-column'>
         {user.questions.length > 0 &&
           user.questions.map((item: any, i: any) => (
@@ -51,7 +36,6 @@ const UserInfoCell: FC<Props> = ({user}) => {
               {removeHTML(item.question)}
             </a>
           ))}
-        {/* <span>{user.email}</span> */}
       </div>
     </div>
   )

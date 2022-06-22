@@ -1,10 +1,8 @@
 import React, {FC, useEffect, useState} from 'react'
 import {Field, ErrorMessage, Formik} from 'formik'
-import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
-import PasswordStrengthBar from 'react-password-strength-bar'
-import axios, {AxiosResponse} from 'axios'
-import {API_URL} from '../../../settings/components/ApiUrl'
 import Select from 'react-select'
+import {getQuizTypes} from '../core/_requests'
+import {useCommonData} from '../../commonData/CommonDataProvider'
 // import {checkEmail} from '../core/_requests'
 
 type Props = {
@@ -16,8 +14,9 @@ type Props = {
 }
 
 const Step1: FC<Props> = ({setFieldValue, values, touched, setFieldError, errors}) => {
-  const [courses, setCourses] = useState([])
-  const [subjects, setSubjects] = useState([])
+  const {allCourses, allSubjects} = useCommonData()
+  const [courses, setCourses] = useState(allCourses)
+  const [subjects, setSubjects] = useState(values.id ? allSubjects : [])
   const [selectedCourses, setSelectedCourses] = useState<any>(null)
   const [quizType, setQuizType] = useState<any>([])
   const [selectedLang, setSelectedLang] = useState<any>([])
@@ -33,8 +32,7 @@ const Step1: FC<Props> = ({setFieldValue, values, touched, setFieldError, errors
   }, [values])
 
   useEffect(() => {
-    getCourses()
-    getQuizTypes()
+    quizTypes()
   }, [])
 
   useEffect(() => {
@@ -43,7 +41,7 @@ const Step1: FC<Props> = ({setFieldValue, values, touched, setFieldError, errors
         values?.courses.some((y: any) => y.course_id === x.id)
       )
       setSelectedCourses(selected)
-      const ids = values.courses.flatMap((x: any) => [x.course_id])
+      const ids = values.courses?.flatMap((x: any) => [x.course_id])
       getSubject(ids)
       setFieldValue('courses', selected)
       let splited = values.language.split(',')
@@ -51,40 +49,19 @@ const Step1: FC<Props> = ({setFieldValue, values, touched, setFieldError, errors
     }
   }, [courses])
 
-  const getCourses = async () => {
-    await axios
-      .get('http://localhost:3000/questionBank/courses')
-      .then((data: AxiosResponse<any>) => {
-        console.log(data.data, 'data')
-        setCourses(data.data)
+  const quizTypes = async () => {
+    await getQuizTypes()
+      .then((data) => {
+        setQuizType(data)
       })
       .catch((err) => {
         console.log(err, 'err')
       })
   }
 
-  const getSubject = async (ids: any) => {
-    await axios
-      .post('http://localhost:3000/questionBank/subjects', {ids})
-      .then((data: AxiosResponse<any>) => {
-        console.log(data.data, 'datasubj')
-        setSubjects(data.data)
-      })
-      .catch((err) => {
-        console.log(err, 'err')
-      })
-  }
-
-  const getQuizTypes = async () => {
-    await axios
-      .get('http://localhost:3005/quizType')
-      .then((data: AxiosResponse<any>) => {
-        console.log(data.data, 'quiztype')
-        setQuizType(data.data)
-      })
-      .catch((err) => {
-        console.log(err, 'err')
-      })
+  const getSubject = (ids: any) => {
+    let items = allSubjects?.filter((x: any) => ids.some((y: any) => y == x.course_id))
+    setSubjects(items)
   }
 
   return (
@@ -113,7 +90,9 @@ const Step1: FC<Props> = ({setFieldValue, values, touched, setFieldError, errors
           >
             <option></option>
             {quizType?.map((item: any) => (
-              <option value={item.id}>{item.quiz_type}</option>
+              <option key={item.id} value={item.id}>
+                {item.quiz_type}
+              </option>
             ))}
           </Field>
           <div className='text-danger'>
@@ -160,7 +139,7 @@ const Step1: FC<Props> = ({setFieldValue, values, touched, setFieldError, errors
             placeholder='Select an option'
           >
             <option></option>
-            {subjects.map((item: any, i) => (
+            {subjects.map((item: any, i: any) => (
               <option key={i} value={item.id}>
                 {item.subject_name}
               </option>

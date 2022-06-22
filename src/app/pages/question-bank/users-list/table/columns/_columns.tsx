@@ -42,12 +42,6 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     id: 'subject',
     Cell: ({...props}) => <SubjectCell subject_id={props.data[props.row.index].subject_id} />,
   },
-  // {
-  //   Header: (props) => (
-  //     <UserCustomHeader tableProps={props} title='Courses' className='min-w-125px' />
-  //   ),
-  //   accessor: 'courses',
-  // },
   {
     Header: (props) => (
       <UserCustomHeader tableProps={props} title='Added Date' className='min-w-125px' />
@@ -74,12 +68,6 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     id: 'verified',
     Cell: ({...props}) => <Verified questions={props.data[props.row.index].questions} />,
   },
-  // {
-  //   Header: (props) => (
-  //     <UserCustomHeader tableProps={props} title='Verified By' className='min-w-125px' />
-  //   ),
-  //   accessor: 'questions',
-  // },
   {
     Header: (props) => (
       <UserCustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />

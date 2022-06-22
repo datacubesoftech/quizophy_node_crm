@@ -4,9 +4,24 @@ import {User, UsersQueryResponse} from './_models'
 
 const API_URL = 'http://localhost:3005'
 const USER_URL = `${API_URL}/quiz`
+const COURSE_URL = 'http://localhost:3010/course'
+const SUBJECT_URL = 'http://localhost:3012/subject'
+const QUIZTYPE_URL = 'http://localhost:3005/quizType'
 
 const getUsers = (query: string): Promise<UsersQueryResponse> => {
   return axios.get(`${USER_URL}?${query}`).then((d: AxiosResponse<UsersQueryResponse>) => d.data)
+}
+
+const getAllCourses = (): Promise<any> => {
+  return axios.get(`${COURSE_URL}`).then((d: AxiosResponse<any>) => d.data)
+}
+
+const getAllSubjects = (): Promise<any> => {
+  return axios.get(`${SUBJECT_URL}`).then((d: AxiosResponse<any>) => d.data)
+}
+
+const getQuizTypes = (): Promise<any> => {
+  return axios.get(`${QUIZTYPE_URL}`).then((d: AxiosResponse<any>) => d.data)
 }
 
 const getUserById = (id: ID): Promise<User | undefined> => {
@@ -54,4 +69,7 @@ export {
   createUser,
   updateStatus,
   createQuizSetting,
+  getAllCourses,
+  getAllSubjects,
+  getQuizTypes,
 }

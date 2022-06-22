@@ -7,9 +7,7 @@ import {UserSelectionCell} from './UserSelectionCell'
 import {UserCustomHeader} from './UserCustomHeader'
 import {UserSelectionHeader} from './UserSelectionHeader'
 import {User} from '../../core/_models'
-import {CoursesCell} from './Courses'
 import {SubjectCell} from './SubjectCell'
-import {Verified} from './VerifiedCell'
 import { Type } from './Type'
 
 const usersColumns: ReadonlyArray<Column<User>> = [

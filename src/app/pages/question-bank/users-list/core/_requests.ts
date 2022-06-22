@@ -4,6 +4,8 @@ import {User, UsersQueryResponse} from './_models'
 
 const API_URL = 'http://localhost:3000'
 const USER_URL = `${API_URL}/question`
+const COURSE_URL = 'http://localhost:3010/course'
+const SUBJECT_URL = 'http://localhost:3012/subject'
 
 const getUsers = (query: string): Promise<UsersQueryResponse> => {
   return axios.get(`${USER_URL}?${query}`).then((d: AxiosResponse<UsersQueryResponse>) => d.data)
@@ -14,6 +16,14 @@ const getUserById = (id: ID): Promise<User | undefined> => {
     .get(`${USER_URL}/${id}`)
     .then((response: AxiosResponse<Response<User>>) => response.data)
     .then((response: Response<User>) => response.data)
+}
+
+const getAllCourses = (): Promise<any> => {
+  return axios.get(`${COURSE_URL}`).then((d: AxiosResponse<any>) => d.data)
+}
+
+const getAllSubjects = (): Promise<any> => {
+  return axios.get(`${SUBJECT_URL}`).then((d: AxiosResponse<any>) => d.data)
 }
 
 const createUser = (user: User): Promise<User | undefined> => {
@@ -78,4 +88,6 @@ export {
   updateUpi,
   updatePan,
   updateStatus,
+  getAllCourses,
+  getAllSubjects
 }

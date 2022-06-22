@@ -1,24 +1,13 @@
 import {Column} from 'react-table'
 import {UserInfoCell} from './UserInfoCell'
 import {UserLastLoginCell} from './UserLastLoginCell'
-import {UserTwoStepsCell} from './UserTwoStepsCell'
-import {UserActionsCell} from './UserActionsCell'
-import {UserSelectionCell} from './UserSelectionCell'
 import {UserCustomHeader} from './UserCustomHeader'
-import {UserSelectionHeader} from './UserSelectionHeader'
 import {User} from '../../core/_models'
-import {CoursesCell} from './Courses'
 import {SubjectCell} from './SubjectCell'
-import {Verified} from './VerifiedCell'
 import {Type} from './Type'
 import { Marks } from './Marks'
 
 const usersColumns: ReadonlyArray<Column<User>> = [
-  // {
-  //   Header: (props) => <UserSelectionHeader tableProps={props} />,
-  //   id: 'selection',
-  //   Cell: ({...props}) => <UserSelectionCell id={props.data[props.row.index].id} />,
-  // },
   {
     Header: (props) => <UserCustomHeader tableProps={props} title='ID' className='min-w-125px' />,
     accessor: 'id',
@@ -56,17 +45,6 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     id: 'marks',
     Cell: ({...props}) => <Marks marks={props.data[props.row.index].marks} />,
   },
-  // {
-  //   Header: (props) => (
-  //     <UserCustomHeader tableProps={props} title='Action' className='min-w-125px' />
-  //   ),
-  //   id: 'active',
-  //   Cell: ({...props}) => (
-  //     <UserTwoStepsCell
-  //       id={props.data[props.row.index].id}
-  //     />
-  //   ),
-  // },
 ]
 
 export {usersColumns}
