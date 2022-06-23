@@ -168,6 +168,17 @@ export function AsideMenuMain () {
         <AsideMenuItem to='/sales/withdrawal' title='Withdrawal' hasBullet={true} />
         <AsideMenuItem to='/sales/payment-support' title='Payment Support' hasBullet={true} />
       </AsideMenuItemWithSub>
+      <AsideMenuItemWithSub
+        to='/courses'
+        title='Course Setup'
+        fontIcon='bi-chat-left'
+        icon='/media/icons/duotune/communication/com014.svg'
+      >
+        <AsideMenuItem to='/course/courses' title='Courses' hasBullet={true} />
+        <AsideMenuItem to='/course/course-category' title='Course Category' hasBullet={true} />
+        <AsideMenuItem to='/course/subjects' title='Subjects' hasBullet={true} />
+      </AsideMenuItemWithSub>
+      
       <AsideMenuItem
         to='/books'
         icon='/media/icons/duotune/general/gen005.svg'
@@ -180,12 +191,12 @@ export function AsideMenuMain () {
         title='Feedbacks'
         fontIcon='bi-layers'
       />
-      <div className='menu-item'>
+      {/* <div className='menu-item'>
         <div className='menu-content'>
           <div className='separator mx-1 my-4'></div>
         </div>
-      </div>
-      <div className='menu-item'>
+      </div> */}
+      {/* <div className='menu-item'>
         <a
           target='_blank'
           className='menu-link'
@@ -196,7 +207,7 @@ export function AsideMenuMain () {
           </span>
           <span className='menu-title'>Changelog {process.env.REACT_APP_VERSION}</span>
         </a>
-      </div>
+      </div> */}
     </>
   )
 }

@@ -13,7 +13,7 @@ const UserInfoCell: FC<Props> = ({user}) => {
   const {setItemIdForUpdate} = useListView()
   const {users} = useCommonData()
 
-  const item = users.find((x: any) => x.id == user.user_id)
+  const item = users?.find((x: any) => x.id == user.user_id)
 
   const openEditModal = () => {
     setItemIdForUpdate(user.id)

@@ -40,7 +40,7 @@ const AsideDefault: FC = () => {
                 style={{
                   fontSize: 20,
                   fontWeight: 'bold',
-                  color: 'white',
+                  color: '#000',
                   paddingLeft: 5,
                   paddingTop: 15,
                 }}

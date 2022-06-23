@@ -37,11 +37,11 @@
 
   // Dark theme
   &.aside-dark {
-    background-color: get($aside-config, bg-color);
+    background-color: $white;
 
     // Logo
     .aside-logo {
-      background-color: get($aside-config, logo-bg-color);
+      background-color: $white;
     }
 
     // Aside toggle
@@ -176,6 +176,10 @@
             overflow: hidden;
             transition: height get($aside-config, transition-speed) ease;
           }
+        }
+
+        .scroll-color {
+          -webkit-scrollbar : #00ff;
         }
 
         // Custom button
