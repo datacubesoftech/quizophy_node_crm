@@ -2,9 +2,9 @@ import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../_metronic/helpers'
 import {User, UsersQueryResponse} from './_models'
 
-const API_URL = 'http://localhost:3009'
+const API_URL = 'https://quiz.datacubeindia.com/common'
 const BOOK_URL = `${API_URL}/book`
-const COURSE_URL = 'http://localhost:3010/course'
+const COURSE_URL = `${API_URL}/course`
 const getUsers = (query: string): Promise<UsersQueryResponse> => {
   return axios.get(`${BOOK_URL}?${query}`).then((d: AxiosResponse<UsersQueryResponse>) => d.data)
 }
@@ -43,4 +43,12 @@ const deleteSelectedUsers = (userIds: Array<ID>): Promise<void> => {
   return axios.all(requests).then(() => {})
 }
 
-export {getUsers, deleteUser, deleteSelectedUsers, getUserById, createUser, updateStatus, getAllCourses}
+export {
+  getUsers,
+  deleteUser,
+  deleteSelectedUsers,
+  getUserById,
+  createUser,
+  updateStatus,
+  getAllCourses,
+}

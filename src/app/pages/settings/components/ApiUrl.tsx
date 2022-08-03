@@ -1,2 +1,2 @@
-const API_URL = 'http://localhost:3002/option'
-export { API_URL }
+const API_URL = 'https://quiz.datacubeindia.com/common/option'
+export {API_URL}

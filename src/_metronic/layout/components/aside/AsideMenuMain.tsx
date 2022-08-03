@@ -16,7 +16,7 @@ export function AsideMenuMain () {
         title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
         fontIcon='bi-app-indicator'
       />
-      <AsideMenuItem
+      {/* <AsideMenuItem
         to='/builder'
         icon='/media/icons/duotune/general/gen019.svg'
         title='Layout Builder'
@@ -84,10 +84,10 @@ export function AsideMenuMain () {
         <AsideMenuItem to='/crafted/widgets/mixed' title='Mixed' hasBullet={true} />
         <AsideMenuItem to='/crafted/widgets/tables' title='Tables' hasBullet={true} />
         <AsideMenuItem to='/crafted/widgets/feeds' title='Feeds' hasBullet={true} />
-      </AsideMenuItemWithSub>
-      <div className='menu-item'>
+      </AsideMenuItemWithSub> */}
+      {/* <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
-          <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Apps</span>
+          <span className='menu-section text-muted text-uppercase fs-8 ls-1'></span>
         </div>
       </div>
       <AsideMenuItemWithSub
@@ -99,7 +99,7 @@ export function AsideMenuMain () {
         <AsideMenuItem to='/apps/chat/private-chat' title='Private Chat' hasBullet={true} />
         <AsideMenuItem to='/apps/chat/group-chat' title='Group Chart' hasBullet={true} />
         <AsideMenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
-      </AsideMenuItemWithSub>
+      </AsideMenuItemWithSub> */}
       <AsideMenuItem
         to='/users'
         icon='/media/icons/duotune/general/gen051.svg'
@@ -191,11 +191,11 @@ export function AsideMenuMain () {
         title='Feedbacks'
         fontIcon='bi-layers'
       />
-      {/* <div className='menu-item'>
+      <div className='menu-item'>
         <div className='menu-content'>
           <div className='separator mx-1 my-4'></div>
         </div>
-      </div> */}
+      </div>
       {/* <div className='menu-item'>
         <a
           target='_blank'

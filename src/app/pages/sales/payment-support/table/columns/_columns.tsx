@@ -5,10 +5,9 @@ import {UserTwoStepsCell} from './UserTwoStepsCell'
 import {UserActionsCell} from './UserActionsCell'
 import {UserSelectionCell} from './UserSelectionCell'
 import {UserCustomHeader} from './UserCustomHeader'
-import {UserSelectionHeader} from './UserSelectionHeader'
 import {User} from '../../core/_models'
-import {SubjectCell} from './SubjectCell'
-import {Type} from './Type'
+
+
 
 const usersColumns: ReadonlyArray<Column<User>> = [
   // {

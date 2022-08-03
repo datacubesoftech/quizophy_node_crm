@@ -2,11 +2,11 @@ import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../_metronic/helpers'
 import {User, UsersQueryResponse} from './_models'
 
-const API_URL = 'http://localhost:3008'
+const API_URL = 'https://quiz.datacubeindia.com/wallet'
 const WITHDRAW_URL = `${API_URL}/withdraw`
 const WALLET_URL = `${API_URL}/wallet`
-const USERS = 'http://localhost:3004/user/getAll'
-const QUIZ = 'http://localhost:3005/quiz/getAll'
+const USERS = 'https://quiz.datacubeindia.com/user/user/getAll'
+const QUIZ = 'https://quiz.datacubeindia.com/quiz/quiz/getAll'
 
 const getUsers = (query: string): Promise<UsersQueryResponse> => {
   return axios

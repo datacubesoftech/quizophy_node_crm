@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../_metronic/helpers'
 import {User, UsersQueryResponse} from './_models'
 
-const SUPPORT_URL = 'http://localhost:3008/paymentSupport'
+const SUPPORT_URL = 'https://quiz.datacubeindia.com/wallet/paymentSupport'
 
 const getUsers = (query: string): Promise<UsersQueryResponse> => {
   return axios.get(`${SUPPORT_URL}?${query}`).then((d: AxiosResponse<UsersQueryResponse>) => d.data)

@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../_metronic/helpers'
 import {User, UsersQueryResponse} from './_models'
 
-const COURSE_URL = 'http://localhost:3010/course'
+const COURSE_URL = 'https://quiz.datacubeindia.com/common/course'
 
 const getUsers = (query: string): Promise<UsersQueryResponse> => {
   return axios
@@ -44,4 +44,12 @@ const deleteSelectedUsers = (userIds: Array<ID>): Promise<void> => {
   return axios.all(requests).then(() => {})
 }
 
-export {getUsers, deleteUser, deleteSelectedUsers, getUserById, createUser, updateStatus, getAllCourses}
+export {
+  getUsers,
+  deleteUser,
+  deleteSelectedUsers,
+  getUserById,
+  createUser,
+  updateStatus,
+  getAllCourses,
+}

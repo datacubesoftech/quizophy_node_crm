@@ -3,8 +3,7 @@ import {ID, Response} from '../../../../../_metronic/helpers'
 import {Role, PermissionQueryResponse} from './_models'
 
 // const API_URL = process.env.REACT_APP_THEME_API_URL
-const API_URL = 'http://localhost:3001'
-const API_URL1 = 'http://localhost:3003'
+const API_URL = 'https://quiz.datacubeindia.com/common'
 const ROLE_URL = `${API_URL}/staff`
 
 const getUsers = (query: string): Promise<PermissionQueryResponse> => {
@@ -19,7 +18,7 @@ const getRoles = (): Promise<PermissionQueryResponse> => {
 
 const getPermissions = (): Promise<PermissionQueryResponse> => {
   return axios
-    .get(`${API_URL1}/role/permissions`)
+    .get(`${API_URL}/role/permissions`)
     .then((d: AxiosResponse<PermissionQueryResponse>) => d.data)
 }
 
@@ -55,7 +54,6 @@ const createUser = (role: Role): Promise<Role | undefined> => {
 }
 
 const updateUser = (role: Role): Promise<Role | undefined> => {
-
   const fd = new FormData()
   const admin: any = role.admin
   fd.append('first_name', role.first_name)
