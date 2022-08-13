@@ -36,7 +36,7 @@ const SettingsName: FC<Props> = ({active}) => {
                 key={i}
                 className='menu-item mb-3'
                 onClick={() => {
-                  Navigate(`/settings/${item.name}`)
+                  Navigate(`/dashboard/settings/${item.name}`)
                 }}
               >
                 <span className={`menu-link ${active == item.name ? 'active' : ''}`}>

@@ -101,92 +101,92 @@ export function AsideMenuMain () {
         <AsideMenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
       </AsideMenuItemWithSub> */}
       <AsideMenuItem
-        to='/users'
+        to='/dashboard/users'
         icon='/media/icons/duotune/general/gen051.svg'
         title='Users'
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='/permissions'
+        to='/dashboard/permissions'
         icon='/media/icons/duotune/general/gen058.svg'
         title='Permissions'
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='/roles'
+        to='/dashboard/roles'
         icon='/media/icons/duotune/general/gen059.svg'
         title='Roles'
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='/staff'
+        to='/dashboard/staff'
         icon='/media/icons/duotune/general/gen054.svg'
         title='Staffs'
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='/settings/general'
+        to='/dashboard/settings/general'
         icon='/media/icons/duotune/general/gen055.svg'
         title='Settings'
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='/questions'
+        to='/dashboard/questions'
         icon='/media/icons/duotune/general/gen056.svg'
         title='Question Bank'
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='/quiz'
+        to='/dashboard/quiz'
         icon='/media/icons/duotune/general/gen002.svg'
         title='Quiz'
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='/coupon'
+        to='/dashboard/coupon'
         icon='/media/icons/duotune/general/gen003.svg'
         title='Coupons'
         fontIcon='bi-layers'
       />
       <AsideMenuItemWithSub
-        to='/sponsor'
+        to='/dashboard/sponsor'
         title='Sponsorship'
         fontIcon='bi-chat-left'
         icon='/media/icons/duotune/communication/com012.svg'
       >
-        <AsideMenuItem to='/sponsor/sponsors' title='Sponsors' hasBullet={true} />
-        <AsideMenuItem to='/sponsor/programs' title='Program' hasBullet={true} />
-        <AsideMenuItem to='/sponsor/subscriptions' title='Subscriptions' hasBullet={true} />
+        <AsideMenuItem to='/dashboard/sponsor/sponsors' title='Sponsors' hasBullet={true} />
+        <AsideMenuItem to='/dashboard/sponsor/programs' title='Program' hasBullet={true} />
+        <AsideMenuItem to='/dashboard/sponsor/subscriptions' title='Subscriptions' hasBullet={true} />
       </AsideMenuItemWithSub>
       <AsideMenuItemWithSub
-        to='/sales'
+        to='/dashboard/sales'
         title='Sales'
         fontIcon='bi-chat-left'
         icon='/media/icons/duotune/communication/com013.svg'
       >
-        <AsideMenuItem to='/sales/wallet' title='Wallet' hasBullet={true} />
-        <AsideMenuItem to='/sales/withdrawal' title='Withdrawal' hasBullet={true} />
-        <AsideMenuItem to='/sales/payment-support' title='Payment Support' hasBullet={true} />
+        <AsideMenuItem to='/dashboard/sales/wallet' title='Wallet' hasBullet={true} />
+        <AsideMenuItem to='/dashboard/sales/withdrawal' title='Withdrawal' hasBullet={true} />
+        <AsideMenuItem to='/dashboard/sales/payment-support' title='Payment Support' hasBullet={true} />
       </AsideMenuItemWithSub>
       <AsideMenuItemWithSub
-        to='/courses'
+        to='/dashboard/courses'
         title='Course Setup'
         fontIcon='bi-chat-left'
         icon='/media/icons/duotune/communication/com014.svg'
       >
-        <AsideMenuItem to='/course/courses' title='Courses' hasBullet={true} />
-        <AsideMenuItem to='/course/course-category' title='Course Category' hasBullet={true} />
-        <AsideMenuItem to='/course/subjects' title='Subjects' hasBullet={true} />
+        <AsideMenuItem to='/dashboard/course/courses' title='Courses' hasBullet={true} />
+        <AsideMenuItem to='/dashboard/course/course-category' title='Course Category' hasBullet={true} />
+        <AsideMenuItem to='/dashboard/course/subjects' title='Subjects' hasBullet={true} />
       </AsideMenuItemWithSub>
       
       <AsideMenuItem
-        to='/books'
+        to='/dashboard/books'
         icon='/media/icons/duotune/general/gen005.svg'
         title='Books'
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='/feedback'
+        to='/dashboard/feedback'
         icon='/media/icons/duotune/general/gen006.svg'
         title='Feedbacks'
         fontIcon='bi-layers'
