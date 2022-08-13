@@ -13,6 +13,7 @@ const RtlCssPlugin = require('rtlcss-webpack-plugin')
 
 // global variables
 const rootPath = path.resolve(__dirname)
+console.log(rootPath)
 const distPath = rootPath + '/src/_metronic/assets'
 
 const entries = {
@@ -37,9 +38,11 @@ function mainConfig() {
     entry: entries,
     output: {
       // main output path in assets folder
-      path: distPath,
+      // path: distPath,
       // output path based on the entries' filename
       filename: '[name].js',
+      publicPath: '/',
+      path: path.join(__dirname, 'root'),
     },
     resolve: {
       extensions: ['.scss'],

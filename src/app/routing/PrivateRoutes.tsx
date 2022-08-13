@@ -188,6 +188,23 @@ const PrivateRoutes = () => {
   )
 }
 
+export function componentLoader (lazyComponent: any, attemptsLeft: any) {
+  return new Promise((resolve, reject) => {
+    lazyComponent()
+      .then(resolve)
+      .catch((error: any) => {
+        // let us retry after 1500 ms
+        setTimeout(() => {
+          if (attemptsLeft === 1) {
+            reject(error)
+            return
+          }
+          componentLoader(lazyComponent, attemptsLeft - 1).then(resolve, reject)
+        }, 1500)
+      })
+  })
+}
+
 const SuspensedView: FC = ({children}) => {
   const baseColor = getCSSVariableValue('--bs-primary')
   TopBarProgress.config({
