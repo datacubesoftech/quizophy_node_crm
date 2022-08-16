@@ -3,7 +3,7 @@ import {ID, Response} from '../../../../../_metronic/helpers'
 import {Role, PermissionQueryResponse} from './_models'
 
 // const API_URL = process.env.REACT_APP_THEME_API_URL
-const API_URL = 'https://quiz.datacubeindia.com/common'
+const API_URL = 'https://quiz.datacubeindia.com/api/common'
 const ROLE_URL = `${API_URL}/role`
 
 const getUsers = (query: string): Promise<PermissionQueryResponse> => {

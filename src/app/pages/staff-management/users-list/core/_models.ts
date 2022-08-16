@@ -23,7 +23,7 @@ export const initialRole: Role = {
   email: '',
   phone_number: '',
   password: '',
-  profile_image: null,
+  profile_image: '',
   admin: false,
   role_id: null,
   permissions: [],

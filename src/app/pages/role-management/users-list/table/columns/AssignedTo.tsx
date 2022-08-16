@@ -16,7 +16,7 @@ const AssignedTo: FC<Props> = ({assigned_to}) => (
             data-bs-toggle='tooltip'
             title={`${item.first_name} ${item.last_name}`}
           >
-            {item?.profile_image == null ? (
+            {item?.profile_image == null || item?.profile_image == '' ? (
               <span
                 className='symbol-label text-inverse-warning fw-bolder'
                 style={{backgroundColor: `#${Math.floor(Math.random() * 16777215).toString(16)}`}}

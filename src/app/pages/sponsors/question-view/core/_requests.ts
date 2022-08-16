@@ -2,10 +2,10 @@ import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../_metronic/helpers'
 import {User, UsersQueryResponse} from './_models'
 
-const API_URL = 'https://quiz.datacubeindia.com/common'
+const API_URL = 'https://quiz.datacubeindia.com/api/common'
 const SUBSCRIPTION_URL = `${API_URL}/subscription`
-const PROGRAM = 'https://quiz.datacubeindia.com/common/programs'
-const SPONSOR = 'https://quiz.datacubeindia.com/common/sponsors'
+const PROGRAM = 'https://quiz.datacubeindia.com/api/common/programs'
+const SPONSOR = 'https://quiz.datacubeindia.com/api/common/sponsors'
 
 const getUsers = (query: string): Promise<UsersQueryResponse> => {
   return axios

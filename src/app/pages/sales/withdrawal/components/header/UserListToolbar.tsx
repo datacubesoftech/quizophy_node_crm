@@ -17,7 +17,7 @@ const UsersListToolbar = () => {
       <UsersListFilter />
 
       {/* begin::Export */}
-      <ExportReactCSV csvData={users} fileName={'withdrawRequest'} />
+      <ExportReactCSV csvData={users} fileName={'withdrawRequest.xls'} />
 
       {/* end::Export */}
 

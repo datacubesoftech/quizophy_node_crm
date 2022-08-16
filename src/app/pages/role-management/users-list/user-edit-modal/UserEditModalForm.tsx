@@ -31,7 +31,7 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
   const [roleForEdit, setRoleForEdit] = useState<Role>({
     ...role,
     name: role.name || initialRole.name,
-    role_permission: role.role_permission || initialRole.role_permission,
+    permissions: role.permissions || initialRole.permissions,
   })
 
   useEffect(() => {
@@ -81,7 +81,7 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
 
   const onCheckbox = (e: any, id: number) => {
     const {checked, name} = e.target
-    let perm: any = roleForEdit.role_permission
+    let perm: any = roleForEdit.permissions
     const index = perm?.findIndex((x: any) => x.permission_id == id)
     if (index !== -1) {
       perm[index] = {...perm[index], [name]: checked}
@@ -95,7 +95,7 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
         can_delete: name == 'can_delete' && checked ? true : false,
       })
     }
-    setRoleForEdit({...roleForEdit, role_permission: perm})
+    setRoleForEdit({...roleForEdit, permissions: perm})
   }
 
   return (
@@ -150,16 +150,16 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
                         <div className='d-flex'>
                           <label className='form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15'>
                             <input
-                              {...formik.getFieldProps('role_permission.can_view')}
+                              {...formik.getFieldProps('permissions.can_view')}
                               className='form-check-input'
                               type='checkbox'
                               checked={
-                                roleForEdit.role_permission?.find(
+                                roleForEdit.permissions?.find(
                                   (x: any) => x.permission_id == item.id
                                 )?.can_view
                               }
                               disabled={
-                                roleForEdit.role_permission?.find(
+                                roleForEdit.permissions?.find(
                                   (x: any) => x.permission_id == item.id
                                 )?.can_view_own == true
                               }
@@ -170,17 +170,17 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
                           </label>
                           <label className='form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15'>
                             <input
-                              {...formik.getFieldProps('role_permission.can_view_own')}
+                              {...formik.getFieldProps('permissions.can_view_own')}
                               className='form-check-input'
                               type='checkbox'
                               checked={
-                                roleForEdit.role_permission?.find(
+                                roleForEdit.permissions?.find(
                                   (x: any) => x.permission_id == item.id
                                 )?.can_view_own
                               }
                               name='can_view_own'
                               disabled={
-                                roleForEdit.role_permission?.find(
+                                roleForEdit.permissions?.find(
                                   (x: any) => x.permission_id == item.id
                                 )?.can_view == true
                               }
@@ -190,11 +190,11 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
                           </label>
                           <label className='form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15'>
                             <input
-                              {...formik.getFieldProps('role_permission.can_create')}
+                              {...formik.getFieldProps('permissions.can_create')}
                               className='form-check-input'
                               type='checkbox'
                               checked={
-                                roleForEdit.role_permission?.find(
+                                roleForEdit.permissions?.find(
                                   (x: any) => x.permission_id == item.id
                                 )?.can_create
                               }
@@ -205,11 +205,11 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
                           </label>
                           <label className='form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15'>
                             <input
-                              {...formik.getFieldProps('role_permission.can_edit')}
+                              {...formik.getFieldProps('permissions.can_edit')}
                               className='form-check-input'
                               type='checkbox'
                               checked={
-                                roleForEdit.role_permission?.find(
+                                roleForEdit.permissions?.find(
                                   (x: any) => x.permission_id == item.id
                                 )?.can_edit
                               }
@@ -220,11 +220,11 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
                           </label>
                           <label className='form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-15'>
                             <input
-                              {...formik.getFieldProps('role_permission.can_delete')}
+                              {...formik.getFieldProps('permissions.can_delete')}
                               className='form-check-input'
                               type='checkbox'
                               checked={
-                                roleForEdit.role_permission?.find(
+                                roleForEdit.permissions?.find(
                                   (x: any) => x.permission_id == item.id
                                 )?.can_delete
                               }

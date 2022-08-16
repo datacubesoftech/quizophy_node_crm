@@ -47,9 +47,9 @@ const Step1: FC<Props> = ({setFieldValue, values, touched, setFieldError, errors
               src={
                 values?.profile_image?.name
                   ? URL.createObjectURL(values?.profile_image)
-                  : values?.profile_image != null
-                  ? values?.profile_image
-                  : toAbsoluteUrl('/media/svg/avatars/blank.svg')
+                  : values?.profile_image == null || values.profile_image == ''
+                  ? toAbsoluteUrl('/media/svg/avatars/blank.svg')
+                  : values?.profile_image
               }
               alt='avatar'
               className='image-input-wrapper w-125px h-125px'
@@ -79,7 +79,7 @@ const Step1: FC<Props> = ({setFieldValue, values, touched, setFieldError, errors
               data-bs-toggle='tooltip'
               title='Remove avatar'
               type='button'
-              onClick={() => setFieldValue('profile_image', null)}
+              onClick={() => setFieldValue('profile_image', '')}
             >
               <i className='bi bi-x fs-2'></i>
             </button>
