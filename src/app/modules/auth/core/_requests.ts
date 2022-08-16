@@ -5,9 +5,9 @@ const API_URL = process.env.REACT_APP_API_URL
 const LOCAL_API_URL = process.env.API_URL
 
 export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/verify_token`
-export const LOGIN_URL = `https://quiz.datacubeindia.com/common/staff/login`
-export const VERIFY_URL = `https://quiz.datacubeindia.com/common/staff/verifyOtp`
-export const RESEND_URL = `https://quiz.datacubeindia.com/common/staff/resendOtp`
+export const LOGIN_URL = `https://quiz.datacubeindia.com/api/common/staff/login`
+export const VERIFY_URL = `https://quiz.datacubeindia.com/api/common/staff/verifyOtp`
+export const RESEND_URL = `https://quiz.datacubeindia.com/api/common/staff/resendOtp`
 export const REGISTER_URL = `${API_URL}/register`
 export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
 
