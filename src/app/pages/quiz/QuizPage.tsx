@@ -50,7 +50,7 @@ const Quiz = () => {
             </>
           }
         />
-        <Route index element={<Navigate to='/dashboard/quiz/quiz' />} />
+        <Route index element={<Navigate to='/quiz/quiz' />} />
       </Route>
     </Routes>
   )

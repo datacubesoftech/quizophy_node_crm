@@ -78,7 +78,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='dashboard/users'
+          path='users'
           element={
             <SuspensedView>
               <UsersPage />
@@ -86,7 +86,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='dashboard/permissions'
+          path='permissions'
           element={
             <SuspensedView>
               <PermissionPage />
@@ -94,7 +94,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='dashboard/roles'
+          path='roles'
           element={
             <SuspensedView>
               <RolesPage />
@@ -102,7 +102,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='dashboard/staff'
+          path='staff'
           element={
             <SuspensedView>
               <StaffPage />
@@ -110,7 +110,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='dashboard/settings/*'
+          path='settings/*'
           element={
             <SuspensedView>
               <SettingPage />
@@ -118,7 +118,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='dashboard/questions'
+          path='questions'
           element={
             <SuspensedView>
               <QuestionPage />
@@ -126,7 +126,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='dashboard/coupon'
+          path='coupon'
           element={
             <SuspensedView>
               <CouponPage />
@@ -134,7 +134,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='dashboard/quiz/*'
+          path='quiz/*'
           element={
             <SuspensedView>
               <Quiz />
@@ -142,7 +142,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='dashboard/sponsor/*'
+          path='sponsor/*'
           element={
             <SuspensedView>
               <SponsorPage />
@@ -150,7 +150,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='dashboard/sales/*'
+          path='sales/*'
           element={
             <SuspensedView>
               <SalesPage />
@@ -158,7 +158,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='dashboard/course/*'
+          path='course/*'
           element={
             <SuspensedView>
               <CoursePage />
@@ -166,7 +166,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='dashboard/books'
+          path='books'
           element={
             <SuspensedView>
               <BookPage />
@@ -174,7 +174,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='dashboard/feedback'
+          path='feedback'
           element={
             <SuspensedView>
               <FeedbackPage />
