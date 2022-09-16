@@ -50,7 +50,7 @@ const CoursePage = () => {
             </>
           }
         />
-        <Route index element={<Navigate to='/sponsor/sponsors' />} />
+        <Route index element={<Navigate to='/course/courses' />} />
       </Route>
     </Routes>
   )

@@ -178,7 +178,7 @@ export function AsideMenuMain () {
         <AsideMenuItem to='/course/course-category' title='Course Category' hasBullet={true} />
         <AsideMenuItem to='/course/subjects' title='Subjects' hasBullet={true} />
       </AsideMenuItemWithSub>
-      
+
       <AsideMenuItem
         to='/books'
         icon='/media/icons/duotune/general/gen005.svg'
@@ -189,6 +189,18 @@ export function AsideMenuMain () {
         to='/feedback'
         icon='/media/icons/duotune/general/gen006.svg'
         title='Feedbacks'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='/conference-quiz'
+        icon='/media/icons/duotune/general/gen007.svg'
+        title='Conference Quiz'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='/quiz-template/list'
+        icon='/media/icons/duotune/general/gen008.svg'
+        title='Quiz Templates'
         fontIcon='bi-layers'
       />
       <div className='menu-item'>

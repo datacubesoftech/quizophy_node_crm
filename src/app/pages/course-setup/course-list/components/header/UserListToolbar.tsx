@@ -1,3 +1,4 @@
+import {useRef} from 'react'
 import {KTSVG} from '../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponseData} from '../../core/QueryResponseProvider'
@@ -7,8 +8,10 @@ import {UsersListFilter} from './UsersListFilter'
 const UsersListToolbar = () => {
   const users = useQueryResponseData()
   const {setItemIdForUpdate} = useListView()
+  const openDrawerRef: any = useRef(null)
   const openAddUserModal = () => {
     setItemIdForUpdate(null)
+    openDrawerRef.current.setAttribute('id', 'kt_drawer_course_toggle')
   }
 
   return (
@@ -21,7 +24,12 @@ const UsersListToolbar = () => {
       {/* end::Export */}
 
       {/* begin::Add user */}
-      <button type='button' className='btn btn-primary' onClick={openAddUserModal}>
+      <button
+        type='button'
+        ref={openDrawerRef}
+        className='btn btn-primary'
+        onClick={openAddUserModal}
+      >
         <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
         Add Course
       </button>

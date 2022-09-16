@@ -26,6 +26,8 @@ const PrivateRoutes = () => {
   const BookPage = lazy(() => import('../pages/books/BookPage'))
   const FeedbackPage = lazy(() => import('../pages/feedback/FeedbackPage'))
   const CoursePage = lazy(() => import('../pages/course-setup/CoursePage'))
+  const ConferenceQuizPage = lazy(() => import('../pages/conferenceQuiz/QuizPage'))
+  const TemplatePage = lazy(() => import('../pages/quiz-template/TemplatePage'))
 
   return (
     <Routes>
@@ -178,6 +180,22 @@ const PrivateRoutes = () => {
           element={
             <SuspensedView>
               <FeedbackPage />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path='quiz-template/*'
+          element={
+            <SuspensedView>
+              <TemplatePage />
+            </SuspensedView>
+          }
+        />
+        <Route
+          path='conference-quiz/*'
+          element={
+            <SuspensedView>
+              <ConferenceQuizPage />
             </SuspensedView>
           }
         />

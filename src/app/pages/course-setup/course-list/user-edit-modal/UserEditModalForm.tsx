@@ -1,4 +1,4 @@
-import {FC, useState} from 'react'
+import {FC, useEffect, useRef, useState} from 'react'
 import {ErrorMessage, Field, Form, Formik, FormikValues} from 'formik'
 import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
 import {createAccountSchemas, initialUser, User} from '../core/_models'
@@ -26,6 +26,15 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
     position: role.position || initialUser.position,
     image: role.image || initialUser.image,
   })
+  const closeDrawerRef: any = useRef(null)
+
+  useEffect(() => {
+    console.log(roleForEdit, 'roleforedit')
+  }, [])
+
+  useEffect(() => {
+    console.log(role, 'role')
+  }, [role])
 
   const cancel = (withRefresh?: boolean) => {
     if (withRefresh) {
@@ -35,20 +44,22 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
   }
 
   const submitStep = async (values: User, actions: FormikValues) => {
+    debugger
     try {
       values.image = roleForEdit.image
       await createUser(values)
+    } catch (ex) {
+      console.error(ex)
+    } finally {
+      debugger
       actions.resetForm()
-      cancel(true)
       Swal.fire({
         title: 'Success!',
         text: `Course Updated!`,
         icon: 'success',
         confirmButtonText: 'Okay',
       })
-    } catch (ex) {
-      console.error(ex)
-    } finally {
+      cancel(true)
     }
   }
 
@@ -129,6 +140,10 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
                   name='course_name'
                   className='form-control mb-2'
                   placeholder={'Enter Course Name'}
+                  value={roleForEdit.course_name}
+                  onChange={(e: any) =>
+                    setRoleForEdit({...roleForEdit, course_name: e.target.value})
+                  }
                 />
                 <div className='text-danger mt-2'>
                   <ErrorMessage name='course_name' />
@@ -143,6 +158,8 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
                   name='position'
                   className='form-control mb-2'
                   type='number'
+                  value={roleForEdit.position}
+                  onChange={(e: any) => setRoleForEdit({...roleForEdit, position: e.target.value})}
                   placeholder={'Enter Order of course'}
                 />
                 <div className='text-danger mt-2'>
@@ -151,13 +168,23 @@ const UserEditModalForm: FC<Props> = ({role, isUserLoading}) => {
               </div>
 
               <div className='d-flex flex-stack pt-15'>
-                <div className='mr-2'></div>
-
-                <div>
-                  <button type='submit' className='btn btn-lg btn-primary me-3'>
-                    <span className='indicator-label'>{'Submit'}</span>
-                  </button>
-                </div>
+                <button
+                  ref={closeDrawerRef}
+                  className='btn btn-primary btn-lg'
+                  type='button'
+                  style={{width: '40%'}}
+                  data-kt-element='send'
+                  onClick={() => {
+                    debugger
+                    setItemIdForUpdate(undefined)
+                    closeDrawerRef?.current.setAttribute('id', 'kt_drawer_course_close')
+                  }}
+                >
+                  Cancel
+                </button>
+                <button type='submit' className='btn btn-lg btn-primary' style={{width: '40%'}}>
+                  <span className='indicator-label'>{'Submit'}</span>
+                </button>
               </div>
             </Form>
           )}

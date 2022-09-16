@@ -11,7 +11,6 @@ const AsideDefault: FC = () => {
   const {config, classes} = useLayout()
   const [toggle, setToggle] = useState(false)
   const {aside} = config
-  console.log(aside, 'aside')
 
   return (
     <div

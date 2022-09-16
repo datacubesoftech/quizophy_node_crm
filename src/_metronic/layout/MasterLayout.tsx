@@ -11,6 +11,7 @@ import {PageDataProvider} from './core'
 import {useLocation} from 'react-router-dom'
 import {DrawerMessenger, ActivityDrawer, Main, InviteUsers, UpgradePlan} from '../partials'
 import {MenuComponent} from '../assets/ts/components'
+import {OpenDrawer} from '../../app/pages/course-setup/course-list/user-edit-modal/OpenDrawer'
 
 const MasterLayout = () => {
   const location = useLocation()
@@ -45,6 +46,7 @@ const MasterLayout = () => {
         </div>
       </div>
 
+      <OpenDrawer />
       {/* begin:: Drawers */}
       <ActivityDrawer />
       {/* <RightToolbar /> */}

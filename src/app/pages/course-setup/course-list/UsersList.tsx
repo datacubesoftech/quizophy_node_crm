@@ -5,6 +5,7 @@ import {UsersListHeader} from './components/header/UsersListHeader'
 import {UsersTable} from './table/UsersTable'
 import {UserEditModal} from './user-edit-modal/UserEditModal'
 import {KTCard} from '../../../../_metronic/helpers'
+import {OpenDrawer} from './user-edit-modal/OpenDrawer'
 
 const UsersList = () => {
   const {itemIdForUpdate} = useListView()
@@ -14,7 +15,7 @@ const UsersList = () => {
         <UsersListHeader />
         <UsersTable />
       </KTCard>
-      {itemIdForUpdate !== undefined && <UserEditModal />}
+      {itemIdForUpdate !== undefined && <OpenDrawer /> }
     </>
   )
 }

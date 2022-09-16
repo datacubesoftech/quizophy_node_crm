@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useEffect} from 'react'
+import {FC, useEffect, useRef} from 'react'
 import {useMutation, useQueryClient} from 'react-query'
 import {Link} from 'react-router-dom'
 import {MenuComponent} from '../../../../../../_metronic/assets/ts/components'
@@ -16,6 +16,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
   const {setItemIdForUpdate} = useListView()
   const {query} = useQueryResponse()
   const queryClient = useQueryClient()
+  const openDrawerRef: any = useRef(null)
 
   useEffect(() => {
     MenuComponent.reinitialization()
@@ -23,6 +24,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
 
   const openEditModal = () => {
     setItemIdForUpdate(id)
+    openDrawerRef.current.setAttribute('id', 'kt_drawer_course_toggle')
   }
 
   const deleteItem = useMutation(() => deleteUser(id), {
@@ -50,7 +52,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
       >
         {/* begin::Menu item */}
         <div className='menu-item'>
-          <a className='menu-link px-3' onClick={openEditModal}>
+          <a className='menu-link px-3' onClick={openEditModal} ref={openDrawerRef}>
             Edit
           </a>
         </div>
